@@ -10,6 +10,12 @@
 		// käivitan funktsiooni, saadan kaasa id !!
 		deleteCar($_GET["delete"]);
 	}
+	
+	// salvestan andmebaasi uuendused
+	if(isset($_POST["save"])){
+		
+		updateCar($_POST["id"], $_POST["plate_number"], $_POST["color"]);
+	}
 
 	//käivitan funktsiooni
 	$array_of_cars = getCarData();
@@ -39,12 +45,15 @@
 			if(isset($_GET["edit"]) && $array_of_cars[$i]->id == $_GET["edit"]){
 				
 				echo "<tr>";
+				echo "<form action= 'table.php' method='post'>";
+				echo "<input type='hidden' name='id' value='".$array_of_cars[$i]->id."'>";
 				echo "<td>".$array_of_cars[$i]->id."</td>";
 				echo "<td>".$array_of_cars[$i]->user_id."</td>";
 				echo "<td><input name='plate_number' value='".$array_of_cars[$i]->plate."'></td>";
 				echo "<td><input name='color'value='".$array_of_cars[$i]->color."'></td>";
 				echo "<td><a href='table.php'>cancel</a></td>";
 				echo "<td><input type='submit' name='save'></td>";
+				echo "</form>";
 				echo "</tr>";
 				
 			}else{
